@@ -1,0 +1,70 @@
+<div *ngIf="!loading">
+  <div class="profile">
+    <div>Hello, {{agent!.companyName}}</div>
+    <div>Your tariff is {{agent!.tariff}}</div>
+  </div>
+
+  <button type="button" class="block" (click)="logout()">Logout</button>
+
+
+
+  <div style="margin:0 30px;">
+    <h2 style="text-align: center;">Applications</h2>
+    <table>
+      <tr>
+        <th>Consumer Name</th>
+        <th>Consumer Surname</th>
+        <th>Operator</th>
+        <th>Premium</th>
+        <th>Amount</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Applied On</th>
+        <th>Actions</th>
+      </tr>
+      <tr *ngFor="let application of applications; index as i">
+        <td>{{ application.firstName }}</td>
+        <td>{{ application.surname }}</td>
+        <td>{{ application.operatorFullName }}</td>
+        <td>{{ application.premium }}</td>
+        <td>{{ application.amount }}</td>
+        <td>{{ application.startDate }}</td>
+        <td>{{ application.endDate }}</td>
+        <td>{{ application.date }}</td>
+        <td><button style="margin-right: 5px;" (click)="sign(application.id)">Sign</button>
+          <button (click)="reject(application.id)">Reject</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <div style="margin:0 30px;">
+    <h2 style="text-align: center;">Compensations</h2>
+    <table>
+      <tr>
+        <th>Consumer Name</th>
+        <th>Consumer Surname</th>
+        <th>Insurance Company</th>
+        <th>Operator Full Name</th>
+        <th>Verdict</th>
+        <th>Amount</th>
+        <th>Insurance Amount</th>
+        <th>Applied On</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+      <tr *ngFor="let compensation of compensations; index as i">
+        <td>{{ compensation.firstName }}</td>
+        <td>{{ compensation.surname }}</td>
+        <td>{{ compensation.companyName }}</td>
+        <td>{{ compensation.operatorFullName }}</td>
+        <td>{{ compensation.verdict }}</td>
+        <td>{{ compensation.amount }}</td>
+        <td>{{ compensation.insuranceAmount }}</td>
+        <td>{{ compensation.appliedOn }}</td>
+        <td>{{ compensation.description }}</td>
+        <td><button style="margin-right: 5px;" (click)="refund(compensation.compensationId)">Refund</button>
+          <button (click)="rejectCompensation(compensation.compensationId)">Reject</button></td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div *ngIf="!loading">
+  <div class="profile">
+    <div>{{consumer!.surname}} {{consumer!.firstName}}</div>
+    <div class="phone">Phone: <span>{{consumer?.phone ?? 'is not provided'}}</span></div>
+    <div *ngIf="!insuranceContract">
+      <span>You do not have active insurance</span>
+    </div>
+    <div *ngIf="insuranceContract">
+      <div>Your insurance is issued by {{insuranceContract!.agentCompanyName}}</div>
+      <div>Available from {{formatFate(insuranceContract!.startDate)}} to {{formatFate(insuranceContract!.endDate)}}</div>
+      <div>Insurance premium: {{insuranceContract!.insurancePremium}}</div>
+      <div>Insurance amount: {{insuranceContract!.insuranceAmount}}</div>
+      <div>Status: {{getStateString(insuranceContract!.state)}}</div>
+
+
+    </div>
+  </div>
+
+  <button type="button" class="block" (click)="buyInsurance()" *ngIf="!insuranceContract">Buy insurance</button>
+  <button type="button" class="block" *ngIf="insuranceContract && getStateString(insuranceContract!.state) === 'Approved'" (click)="refund()">Request refund</button>
+  <button type="button" class="block" *ngIf="insuranceContract" (click)="stopInsurance()">Stop insurance anticipatory</button>
+  <button type="button" class="block" (click)="logout()">Logout</button>
+
+
+  <div *ngIf="insuranceContract && getStateString(insuranceContract!.state) === 'Approved'" style="margin:0 30px;">
+    <h2 style="text-align: center;">Compensations</h2>
+    <table>
+      <tr>
+        <th>Consumer Name</th>
+        <th>Consumer Surname</th>
+        <th>Status</th>
+        <th>Insurance Company</th>
+        <th>Operator Full Name</th>
+        <th>Verdict</th>
+        <th>Amount</th>
+        <th>Insurance Amount</th>
+        <th>Applied On</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+      <tr *ngFor="let compensation of compensations; index as i">
+        <td>{{ compensation.firstName }}</td>
+        <td>{{ compensation.surname }}</td>
+        <td>{{ statusText(compensation.status) }}</td>
+        <td>{{ compensation.companyName }}</td>
+        <td>{{ compensation.operatorFullName }}</td>
+        <td>{{ compensation.verdict }}</td>
+        <td>{{ compensation.amount }}</td>
+        <td>{{ compensation.insuranceAmount }}</td>
+        <td>{{ compensation.appliedOn }}</td>
+        <td>{{ compensation.description }}</td>
+        <td><button *ngIf="statusText(compensation.status) !== 'Closed' && statusText(compensation.status) !== 'Approved'" (click)="cancel(compensation.compensationId)">Cancel</button></td>
+      </tr>
+    </table>
+  </div>
+
+</div>

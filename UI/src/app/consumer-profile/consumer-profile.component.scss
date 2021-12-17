@@ -1,0 +1,46 @@
+.block {
+  display: block;
+  width: 40vh;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  background-color: #04AA6D;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40vh;
+  margin-bottom: 20px;
+}
+
+.phone {
+  margin-bottom: 10px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background-color: red;
+  border: 1px solid red;
+}
+td {
+  border: 1px solid #dddddd;
+}
+td, th {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
